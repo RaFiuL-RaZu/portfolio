@@ -67,15 +67,7 @@ body.cv-modal-open{overflow:hidden}.cv-modal{position:fixed;inset:0;z-index:80;d
   padding-bottom: 24px;
 }
 
-#smoke-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.95;
-}
+
 
 .cinematic-header {
   position: relative;
@@ -353,11 +345,495 @@ body.cv-modal-open{overflow:hidden}.cv-modal{position:fixed;inset:0;z-index:80;d
   .hero-scroll { max-width: 90%; }
 }
 
+
+/* ========================================================
+   MOBILE APP VIEW 3D BACKGROUND SCENE
+   ======================================================== */
+.mobile-app-bg-scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bg-grid-mesh {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 25%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 25%, transparent 80%);
+  opacity: 0.65;
+}
+
+.bg-glow-left {
+  position: absolute;
+  top: 15%;
+  left: -10%;
+  width: 580px;
+  height: 580px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.16) 0%, rgba(99, 102, 241, 0.05) 50%, transparent 70%);
+  filter: blur(55px);
+}
+
+.bg-glow-right {
+  position: absolute;
+  top: 10%;
+  right: -10%;
+  width: 620px;
+  height: 620px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, rgba(56, 189, 248, 0.06) 50%, transparent 70%);
+  filter: blur(55px);
+}
+
+.phones-perspective-stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3vw;
+}
+
+.mobile-device-frame {
+  position: absolute;
+  width: 290px;
+  height: 580px;
+  border-radius: 44px;
+  background: #090e17;
+  border: 7px solid #1c2536;
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 0 45px rgba(56, 189, 248, 0.18);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+
+.device-island {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 84px;
+  height: 22px;
+  background: #000000;
+  border-radius: 20px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+}
+.island-camera {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0d1726;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.device-status-bar {
+  position: relative;
+  z-index: 15;
+  padding: 10px 18px 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #cbd5e1;
+}
+.device-status-bar .status-right {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+}
+
+.phone-left {
+  left: 2%;
+  top: 50%;
+  transform: translateY(-50%) rotateY(24deg) rotateX(10deg) rotateZ(-6deg);
+  animation: floatPhoneLeft 6s ease-in-out infinite alternate;
+}
+@keyframes floatPhoneLeft {
+  0% { transform: translateY(-50%) rotateY(24deg) rotateX(10deg) rotateZ(-6deg); }
+  100% { transform: translateY(-54%) rotateY(27deg) rotateX(7deg) rotateZ(-4deg); }
+}
+
+.app-screen-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 14px;
+  background: #090e18;
+  position: relative;
+  overflow: hidden;
+}
+
+.screen-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.app-brand-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.app-brand-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #38bdf8;
+}
+
+.screen-map-preview {
+  margin-top: 12px;
+  height: 140px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #101c2e, #0c1524);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+}
+.map-road-1 {
+  position: absolute;
+  width: 200%;
+  height: 2px;
+  background: rgba(56, 189, 248, 0.15);
+  top: 45%;
+  transform: rotate(25deg);
+}
+.map-road-2 {
+  position: absolute;
+  width: 200%;
+  height: 2px;
+  background: rgba(56, 189, 248, 0.15);
+  top: 65%;
+  transform: rotate(-35deg);
+}
+.map-pin-pulse {
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pin-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 14px #38bdf8;
+}
+.pin-badge {
+  margin-top: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.9);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.screen-chat-bubble {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  font-size: 11px;
+  line-height: 1.4;
+  color: #e2e8f0;
+}
+.screen-chat-bubble strong {
+  color: #38bdf8;
+  display: block;
+  margin-bottom: 2px;
+  font-size: 10px;
+}
+
+.screen-feed-item {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.feed-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+}
+.feed-sub {
+  font-size: 9.5px;
+  color: #94a3b8;
+}
+.feed-btn {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #38bdf8;
+  color: #000;
+  font-size: 9.5px;
+  font-weight: 700;
+}
+
+.screen-bottom-nav {
+  margin-top: auto;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  font-size: 10px;
+}
+.screen-bottom-nav span.active {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+.phone-right {
+  right: 2%;
+  top: 50%;
+  transform: translateY(-50%) rotateY(-24deg) rotateX(10deg) rotateZ(6deg);
+  animation: floatPhoneRight 6s ease-in-out infinite alternate;
+}
+@keyframes floatPhoneRight {
+  0% { transform: translateY(-50%) rotateY(-24deg) rotateX(10deg) rotateZ(6deg); }
+  100% { transform: translateY(-46%) rotateY(-21deg) rotateX(13deg) rotateZ(4deg); }
+}
+
+.phone-right .app-screen-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.floating-ui-card {
+  position: absolute;
+  z-index: 5;
+  padding: 10px 16px;
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  pointer-events: auto;
+  transition: transform 0.3s ease;
+}
+.floating-ui-card:hover {
+  transform: scale(1.05) translateY(-3px);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.card-flutter-code {
+  top: 24%;
+  left: 23%;
+  font-family: monospace;
+  font-size: 11px;
+  border-color: rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+  animation: floatWidget1 5s ease-in-out infinite alternate;
+}
+@keyframes floatWidget1 {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+.card-push-notif {
+  bottom: 22%;
+  left: 21%;
+  max-width: 260px;
+  border-left: 3px solid #10b981;
+  animation: floatWidget2 5.5s ease-in-out infinite alternate;
+}
+@keyframes floatWidget2 {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(8px); }
+}
+
+.card-payment-verified {
+  top: 28%;
+  right: 22%;
+  border-left: 3px solid #38bdf8;
+  animation: floatWidget3 4.8s ease-in-out infinite alternate;
+}
+@keyframes floatWidget3 {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+.card-play-store {
+  bottom: 26%;
+  right: 21%;
+  border-left: 3px solid #f59e0b;
+  animation: floatWidget4 6.2s ease-in-out infinite alternate;
+}
+@keyframes floatWidget4 {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(10px); }
+}
+
+.hero-center-mask {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 58% 68% at 50% 50%, rgba(7, 9, 14, 0.9) 25%, rgba(7, 9, 14, 0.45) 75%, transparent 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+@media (max-width: 1100px) {
+  .phone-left { left: -70px; transform: scale(0.82) translateY(-50%) rotateY(18deg); opacity: 0.75; }
+  .phone-right { right: -70px; transform: scale(0.82) translateY(-50%) rotateY(-18deg); opacity: 0.75; }
+  .card-flutter-code, .card-payment-verified { display: none; }
+}
+@media (max-width: 768px) {
+  .phone-left, .phone-right { opacity: 0.22; filter: blur(2px); transform: scale(0.7) translateY(-50%); }
+  .floating-ui-card { display: none; }
+}
+
 </style></head><body class="dark"><div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 
+
 <section class="hero-cinematic" id="hero-cinematic">
-  <!-- Interactive Liquid Smoke Canvas -->
-  <canvas id="smoke-canvas"></canvas>
+  
+  <!-- 3D Mobile App View Background Scene -->
+  <div class="mobile-app-bg-scene" id="mobileBgScene">
+    <div class="bg-grid-mesh"></div>
+    <div class="bg-glow-left"></div>
+    <div class="bg-glow-right"></div>
+
+    <div class="phones-perspective-stage">
+      
+      <!-- Left Phone: Loc Meet Social & Community Mobile App -->
+      <div class="mobile-device-frame phone-left" id="phoneLeft">
+        <div class="device-island"><div class="island-camera"></div></div>
+        <div class="device-status-bar">
+          <span>09:41</span>
+          <div class="status-right"><span>5G</span><span>100%</span></div>
+        </div>
+        
+        <div class="app-screen-content">
+          <div class="screen-header-bar">
+            <div class="app-brand-title">
+              <span class="app-brand-dot"></span>
+              <span>Loc Meet</span>
+            </div>
+            <span style="font-size: 10px; color: #38bdf8; background: rgba(56,189,248,0.12); padding: 2px 6px; border-radius: 4px;">Live Map</span>
+          </div>
+
+          <div class="screen-map-preview">
+            <div class="map-road-1"></div>
+            <div class="map-road-2"></div>
+            <div class="map-pin-pulse">
+              <div class="pin-dot"></div>
+              <div class="pin-badge">Mohakhali Hub</div>
+            </div>
+            <div style="font-size: 9px; color: #94a3b8; margin-top: auto;">18 Techies nearby</div>
+          </div>
+
+          <div class="screen-chat-bubble">
+            <strong>Tanvir · SparkTech</strong>
+            <span>Hey Rafiul, the new Flutter release is live on the Play Store!</span>
+          </div>
+
+          <div class="screen-feed-item">
+            <div>
+              <div class="feed-title">Flutter Developers Dhaka</div>
+              <div class="feed-sub">42 active members online</div>
+            </div>
+            <div class="feed-btn">Join</div>
+          </div>
+
+          <div class="screen-bottom-nav">
+            <span class="active">● Explore</span>
+            <span>💬 Chat</span>
+            <span>👤 Profile</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Phone: SWIMLETES Real Mobile App -->
+      <div class="mobile-device-frame phone-right" id="phoneRight">
+        <div class="device-island"><div class="island-camera"></div></div>
+        <div class="device-status-bar">
+          <span>09:41</span>
+          <div class="status-right"><span>5G</span><span>100%</span></div>
+        </div>
+        <img src="swimletes-app.png" alt="SWIMLETES App Preview" class="app-screen-img" loading="eager">
+      </div>
+
+    </div>
+
+    <!-- Floating Mobile UI Chips -->
+    <div class="floating-ui-card card-flutter-code">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M14.314 0L2.3 12.014l3.7 3.7L21.714 0h-7.4z"/><path d="M14.314 13.714L8.6 19.428l3.7 3.715 9.414-9.429h-7.4z"/><path d="M8.6 19.428l5.714-5.714 3.715 3.714-5.715 5.715L8.6 19.428z"/></svg>
+      <span>Obx(() =&gt; LessonScheduleView())</span>
+    </div>
+
+    <div class="floating-ui-card card-push-notif">
+      <div style="width: 26px; height: 26px; border-radius: 8px; background: rgba(16, 185, 129, 0.2); color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 13px;">🔔</div>
+      <div>
+        <div style="font-size: 11px; font-weight: 700; color: #fff;">Lesson Booking Confirmed</div>
+        <div style="font-size: 10px; color: #94a3b8;">Instructor Alex verified your schedule</div>
+      </div>
+    </div>
+
+    <div class="floating-ui-card card-payment-verified">
+      <div style="width: 22px; height: 22px; border-radius: 50%; background: rgba(56, 189, 248, 0.2); color: #38bdf8; display: flex; align-items: center; justify-content: center; font-size: 12px;">✓</div>
+      <div>
+        <div style="font-size: 11px; font-weight: 700; color: #fff;">Stripe &amp; IAP Connected</div>
+        <div style="font-size: 10px; color: #38bdf8;">Payment Gateway 100% Ready</div>
+      </div>
+    </div>
+
+    <div class="floating-ui-card card-play-store">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b"><path d="M3.609 1.814L13.792 12 3.61 22.186a2.404 2.404 0 0 1-.61-.926V2.74c0-.337.218-.684.609-.926zM15.207 13.414l2.585 2.586-13.06 7.464 10.475-10.05zm0-2.828L4.732.536l13.06 7.464-2.585 2.586zm1.415 1.414l3.771-2.155a1.8 1.8 0 0 1 0 3.125l-3.771-2.155v1.185-1.185z"/></svg>
+      <div>
+        <div style="font-size: 11px; font-weight: 700; color: #fff;">Google Play Production</div>
+        <div style="font-size: 10px; color: #f59e0b;">Bundle v2.4.1 Active</div>
+      </div>
+    </div>
+
+    <!-- Center Contrast Veil -->
+    <div class="hero-center-mask"></div>
+  </div>
 
   <!-- Top Header Navigation -->
   <header class="cinematic-header">
@@ -388,7 +864,7 @@ body.cv-modal-open{overflow:hidden}.cv-modal{position:fixed;inset:0;z-index:80;d
   <!-- Centered Hero Content -->
   <div class="cinematic-body">
     <div class="hero-capsule">
-      <span class="capsule-dot"></span>
+      <span class="capsule-dot">•</span>
       <span>Crafting Unique Mobile Experiences</span>
     </div>
 
@@ -439,6 +915,7 @@ body.cv-modal-open{overflow:hidden}.cv-modal{position:fixed;inset:0;z-index:80;d
   </div>
 </section>
 
+
 <main class="wrap">
 <section id="skills"><div class="section-head"><div><div class="eyebrow">01 / My toolkit</div><h2>Skills that ship ideas.</h2></div><p>From the first screen to store deployment, the tools I work with.</p></div><div class="skills" id="skill-grid"></div></section>
 <section id="experience"><div class="section-head"><div><div class="eyebrow">02 / The journey</div><h2>Experience.</h2></div><p>Hands-on development, real products, and continuous learning.</p></div><article class="job"><div class="date">June 2025 — Present</div><div><h3>Flutter Developer</h3><div class="company">SparkTech Agency</div><ul><li>Develop and maintain cross-platform mobile applications using Flutter and Dart.</li><li>Implement REST APIs, Firebase, Socket.IO, authentication, payments, deep linking, and localization.</li><li>Use GetX and MVVM to build maintainable applications with responsive interfaces.</li><li>Handle debugging, testing, Android and iOS builds, and deployment.</li></ul><div class="tags"><span class="tag">Flutter</span><span class="tag">GetX</span><span class="tag">MVVM</span><span class="tag">Firebase</span></div></div></article><article class="job"><div class="date">Dec 2024 — May 2025<br>6-month internship</div><div><h3>Internship, Flutter</h3><div class="company">Classic IT</div><p class="lede">Learned production workflow through hands-on work with Provider, REST APIs, MVVM, and repositories.</p></div></article></section>
@@ -463,193 +940,31 @@ const progress=document.querySelector('#scroll-progress');function updateProgres
 const navLinks=[...document.querySelectorAll('#main-nav a')],pageSections=[...document.querySelectorAll('main section[id]')];const sectionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){navLinks.forEach(link=>link.classList.toggle('active',link.getAttribute('href')==='#'+entry.target.id))}}),{rootMargin:'-35% 0px -55%',threshold:0});pageSections.forEach(section=>sectionObserver.observe(section));
 const deviceStage=document.querySelector('#device-stage');if(deviceStage&&!reduceMotion){deviceStage.addEventListener('pointermove',event=>{const rect=deviceStage.getBoundingClientRect(),x=(event.clientX-rect.left)/rect.width-.5,y=(event.clientY-rect.top)/rect.height-.5;deviceStage.style.setProperty('--mx',`${x*12}px`);deviceStage.style.setProperty('--my',`${y*12}px`)});deviceStage.addEventListener('pointerleave',()=>{deviceStage.style.setProperty('--mx','0px');deviceStage.style.setProperty('--my','0px')})}
 </script>
+
+
+
 <script>
-// WebGL Liquid Smoke Wave Background Shader
+// Interactive 3D Parallax for Background Mobile Devices
 (function() {
-  const canvas = document.getElementById('smoke-canvas');
-  if (!canvas) return;
-  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  const hero = document.getElementById('hero-cinematic');
+  const pLeft = document.getElementById('phoneLeft');
+  const pRight = document.getElementById('phoneRight');
 
-  if (!gl) {
-    // 2D Canvas Fallback
-    const ctx = canvas.getContext('2d');
-    function resize2D() {
-      canvas.width = canvas.parentElement.clientWidth || window.innerWidth;
-      canvas.height = canvas.parentElement.clientHeight || window.innerHeight;
-    }
-    window.addEventListener('resize', resize2D);
-    resize2D();
-    let step = 0;
-    function draw2D() {
-      ctx.fillStyle = '#07080a';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.save();
-      for (let i = 0; i < 4; i++) {
-        ctx.beginPath();
-        const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-        grad.addColorStop(0, 'rgba(255,255,255,0)');
-        grad.addColorStop(0.5, 'rgba(180,195,210,0.06)');
-        grad.addColorStop(1, 'rgba(255,255,255,0)');
-        ctx.fillStyle = grad;
-        ctx.moveTo(0, canvas.height * 0.4);
-        for (let x = 0; x <= canvas.width; x += 20) {
-          const y = canvas.height * 0.5 + Math.sin(x * 0.003 + step + i) * 120 + Math.cos(x * 0.002 - step * 0.5) * 80;
-          ctx.lineTo(x, y);
-        }
-        ctx.lineTo(canvas.width, canvas.height);
-        ctx.lineTo(0, canvas.height);
-        ctx.closePath();
-        ctx.fill();
-      }
-      ctx.restore();
-      step += 0.01;
-      requestAnimationFrame(draw2D);
-    }
-    draw2D();
-    return;
+  if (hero && pLeft && pRight && window.innerWidth > 768) {
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+      pLeft.style.transform = `translateY(-50%) rotateY(${24 + x * 14}deg) rotateX(${10 - y * 12}deg) rotateZ(${-6 + x * 3}deg) translateZ(${x * 35}px)`;
+      pRight.style.transform = `translateY(-50%) rotateY(${-24 + x * 14}deg) rotateX(${10 - y * 12}deg) rotateZ(${6 + x * 3}deg) translateZ(${-x * 35}px)`;
+    });
+
+    hero.addEventListener('mouseleave', () => {
+      pLeft.style.transform = 'translateY(-50%) rotateY(24deg) rotateX(10deg) rotateZ(-6deg)';
+      pRight.style.transform = 'translateY(-50%) rotateY(-24deg) rotateX(10deg) rotateZ(6deg)';
+    });
   }
-
-  const vsSource = `
-    attribute vec2 position;
-    void main() {
-      gl_Position = vec4(position, 0.0, 1.0);
-    }
-  `;
-
-  const fsSource = `
-    precision highp float;
-    uniform vec2 u_resolution;
-    uniform float u_time;
-    uniform vec2 u_mouse;
-
-    vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-    vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-    vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
-
-    float snoise(vec2 v) {
-      const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
-      vec2 i  = floor(v + dot(v, C.yy) );
-      vec2 x0 = v -   i + dot(i, C.xx);
-      vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-      vec4 x12 = x0.xyxy + C.xxzz;
-      x12.xy -= i1;
-      i = mod289(i);
-      vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 )) + i.x + vec3(0.0, i1.x, 1.0 ));
-      vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
-      m = m*m ;
-      m = m*m ;
-      vec3 x = 2.0 * fract(p * C.www) - 1.0;
-      vec3 h = abs(x) - 0.5;
-      vec3 ox = floor(x + 0.5);
-      vec3 a0 = x - ox;
-      m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
-      vec3 g;
-      g.x  = a0.x  * x0.x  + h.x  * x0.y;
-      g.yz = a0.yz * x12.xz + h.yz * x12.yw;
-      return 130.0 * dot(m, g);
-    }
-
-    float fbm(vec2 p) {
-      float v = 0.0;
-      float a = 0.52;
-      for (int i = 0; i < 4; i++) {
-        v += a * snoise(p);
-        p *= 2.05;
-        a *= 0.48;
-      }
-      return v;
-    }
-
-    void main() {
-      vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-      vec2 p = (gl_FragCoord.xy * 2.0 - u_resolution.xy) / min(u_resolution.x, u_resolution.y);
-
-      float t = u_time * 0.12;
-
-      vec2 q = vec2(
-        fbm(p * 1.1 + vec2(t * 0.15, -t * 0.08)),
-        fbm(p * 1.1 + vec2(-t * 0.1, t * 0.12) + vec2(2.4, 4.3))
-      );
-
-      vec2 r = vec2(
-        fbm(p * 1.3 + 3.0 * q + vec2(1.7, 9.2) + vec2(t * 0.2, -t * 0.14)),
-        fbm(p * 1.3 + 3.0 * q + vec2(8.3, 2.8) + vec2(-t * 0.15, t * 0.18))
-      );
-
-      float f = fbm(p * 1.2 + 3.2 * r);
-
-      vec3 baseColor = vec3(0.027, 0.031, 0.039);
-      vec3 midColor  = vec3(0.24, 0.28, 0.33);
-      vec3 highlight = vec3(0.85, 0.90, 0.96);
-
-      float smokeVal = clamp((f * f * 3.5) + (0.5 * f), 0.0, 1.0);
-      vec3 color = mix(baseColor, midColor, clamp(length(q) * 1.2, 0.0, 1.0));
-      color = mix(color, highlight, clamp(length(r.x) * smokeVal * 0.75, 0.0, 1.0));
-
-      float dist = length(uv - vec2(0.5, 0.5));
-      color *= smoothstep(1.3, 0.2, dist);
-
-      gl_FragColor = vec4(color, 1.0);
-    }
-  `;
-
-  function createShader(gl, type, source) {
-    const shader = gl.createShader(type);
-    gl.shaderSource(shader, source);
-    gl.compileShader(shader);
-    return shader;
-  }
-
-  const program = gl.createProgram();
-  gl.attachShader(program, createShader(gl, gl.VERTEX_SHADER, vsSource));
-  gl.attachShader(program, createShader(gl, gl.FRAGMENT_SHADER, fsSource));
-  gl.linkProgram(program);
-  gl.useProgram(program);
-
-  const positionBuffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-    -1, -1,
-     1, -1,
-    -1,  1,
-    -1,  1,
-     1, -1,
-     1,  1,
-  ]), gl.STATIC_DRAW);
-
-  const positionLocation = gl.getAttribLocation(program, 'position');
-  gl.enableVertexAttribArray(positionLocation);
-  gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-
-  const uResolution = gl.getUniformLocation(program, 'u_resolution');
-  const uTime = gl.getUniformLocation(program, 'u_time');
-  const uMouse = gl.getUniformLocation(program, 'u_mouse');
-
-  let mouseX = 0.5, mouseY = 0.5;
-  window.addEventListener('mousemove', e => {
-    mouseX = e.clientX / window.innerWidth;
-    mouseY = 1.0 - (e.clientY / window.innerHeight);
-  });
-
-  function resize() {
-    const parent = canvas.parentElement;
-    canvas.width = parent ? parent.clientWidth : window.innerWidth;
-    canvas.height = parent ? parent.clientHeight : window.innerHeight;
-    gl.viewport(0, 0, canvas.width, canvas.height);
-  }
-  window.addEventListener('resize', resize);
-  resize();
-
-  const startTime = performance.now();
-  function render() {
-    const elapsed = (performance.now() - startTime) * 0.001;
-    gl.uniform2f(uResolution, canvas.width, canvas.height);
-    gl.uniform1f(uTime, elapsed);
-    gl.uniform2f(uMouse, mouseX, mouseY);
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
-    requestAnimationFrame(render);
-  }
-  requestAnimationFrame(render);
 })();
 </script>
 
